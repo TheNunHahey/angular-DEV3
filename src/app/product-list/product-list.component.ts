@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { products } from '../products';
 
+import { Liff } from '@line/liff';
+
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
