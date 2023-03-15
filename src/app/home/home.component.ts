@@ -2,8 +2,7 @@ import { Component, VERSION, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import liff from '@line/liff';
 import { HttpClient } from '@angular/common/http';
-import { RouteConfigLoadStart, Router } from '@angular/router';
-import { Routes, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 type UnPromise<T> = T extends Promise<infer X> ? X : T;
 
