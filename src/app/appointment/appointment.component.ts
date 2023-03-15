@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { $locationShim } from '@angular/common/upgrade';
 
 @Component({
   selector: 'app-appointment',
