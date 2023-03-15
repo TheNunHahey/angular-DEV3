@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -6,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
+  onTest(event?: MouseEvent) {
+    this.router.navigate(['home']);
+  }
 }

@@ -68,13 +68,17 @@ export class HomeComponent {
       this.router.navigate(['appointment']);
       //alert('TEST');
     } else {
-      alert('TEST');
+      //alert('TEST');
     }
   }
 
   onTest2(event?: MouseEvent) {
     this.result2 = true;
     this.router.navigate(['notfound']);
+  }
+  onTest3(event?: MouseEvent) {
+    this.result2 = true;
+    this.router.navigate(['register']);
   }
 }
 
