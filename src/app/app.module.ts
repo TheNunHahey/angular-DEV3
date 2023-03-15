@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
+import { ajax, css } from 'jquery';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -19,6 +20,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     ReactiveFormsModule,
     HttpClientModule,
     DataTablesModule,
+    ajax,
+    css,
     RouterModule.forRoot([{ path: '', component: HomeComponent }]),
     AppRoutingModule,
   ],
