@@ -65,17 +65,14 @@ export class HomeComponent {
         this.result = data.LineRegistered;
       });
     if (this.result) {
-      this.router.navigate(['appointment']);
+      //this.router.navigate(['appointment']);
       //alert('TEST');
     } else {
       //alert('TEST');
+      this.router.navigate(['appointment']);
     }
   }
 
-  onTest2(event?: MouseEvent) {
-    this.result2 = true;
-    this.router.navigate(['notfound']);
-  }
   onTest3(event?: MouseEvent) {
     this.result2 = true;
     this.router.navigate(['register']);
