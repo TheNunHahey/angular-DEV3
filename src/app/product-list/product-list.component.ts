@@ -10,10 +10,14 @@ type UnPromise<T> = T extends Promise<infer X> ? X : T;
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent {
   os: ReturnType<typeof liff.getOS>;
   profile: UnPromise<ReturnType<typeof liff.getProfile>>;
-  ngOnInit(): void {
+  onSave(event?: MouseEvent) {
+    if (event) {
+      event.stopPropagation();
+    }
+
     liff
       .init({ liffId: '1657421042-ekawW2jw' })
       .then(() => {
