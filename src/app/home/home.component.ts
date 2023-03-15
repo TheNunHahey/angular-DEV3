@@ -12,7 +12,7 @@ type UnPromise<T> = T extends Promise<infer X> ? X : T;
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  result: String;
+  result: Boolean;
   result2: Boolean;
   os: ReturnType<typeof liff.getOS>;
   profile: UnPromise<ReturnType<typeof liff.getProfile>>;
@@ -64,10 +64,17 @@ export class HomeComponent {
         console.log(data.LineRegistered);
         this.result = data.LineRegistered;
       });
+    if (this.result) {
+      this.router.navigate(['appointment']);
+      //alert('TEST');
+    } else {
+      alert('TEST');
+    }
   }
 
   onTest2(event?: MouseEvent) {
-    this.router.navigate(['/appointment']);
+    this.result2 = true;
+    this.router.navigate(['appointment']);
   }
 }
 
