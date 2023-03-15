@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-//import { AppointmentComponent } from './appointment/appointment.component';
+import { AppointmentComponent } from './appointment/appointment.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     RouterModule.forRoot([{ path: '', component: HomeComponent }]),
   ],
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, AppointmentComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
