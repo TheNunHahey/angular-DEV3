@@ -13,7 +13,7 @@ type UnPromise<T> = T extends Promise<infer X> ? X : T;
 export class ProductListComponent {
   os: ReturnType<typeof liff.getOS>;
   profile: UnPromise<ReturnType<typeof liff.getProfile>>;
-  onSave(event?: MouseEvent) {
+  onClick(event?: MouseEvent) {
     if (event) {
       event.stopPropagation();
     }
