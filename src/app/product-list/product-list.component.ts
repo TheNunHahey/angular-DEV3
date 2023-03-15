@@ -1,18 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, VERSION, OnInit } from '@angular/core';
 import { products } from '../products';
+import { Observable } from 'rxjs';
+import liff from '@line/liff';
 
-import { Liff } from '@line/liff';
+type UnPromise<T> = T extends Promise<infer X> ? X : T;
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent {
-  products = products;
-
-  share() {
-    window.alert('The product has been shared!');
+export class ProductListComponent implements OnInit {
+  os: ReturnType<typeof liff.getOS>;
+  profile: UnPromise<ReturnType<typeof liff.getProfile>>;
+  ngOnInit(): void {
+    liff
+      .init({ liffId: '1657421042-ekawW2jw' })
+      .then(() => {
+        this.os = liff.getOS();
+        if (liff.isLoggedIn()) {
+          liff
+            .getProfile()
+            .then((profile) => {
+              this.profile = profile;
+            })
+            .catch(console.error);
+        } else {
+          liff.login();
+        }
+      })
+      .catch(console.error);
   }
 }
 
