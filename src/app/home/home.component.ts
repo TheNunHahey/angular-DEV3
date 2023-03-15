@@ -16,7 +16,6 @@ export class HomeComponent {
     if (event) {
       event.stopPropagation();
     }
-
     liff
       .init({ liffId: '1657421042-ekawW2jw' })
       .then(() => {
@@ -33,6 +32,17 @@ export class HomeComponent {
         }
       })
       .catch(console.error);
+  }
+
+  json1 = {
+    param: {
+      ContextKey: 'ReU',
+      LineUserID: 'Ue9d21deca4c514a40bfdd965f6996e22',
+    },
+  };
+
+  onTest(event?: MouseEvent) {
+    console.log(JSON.stringify(this.json1));
   }
 }
 
