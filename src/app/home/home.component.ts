@@ -1,5 +1,4 @@
 import { Component, VERSION, OnInit } from '@angular/core';
-import { products } from '../products';
 import { Observable } from 'rxjs';
 import liff from '@line/liff';
 
