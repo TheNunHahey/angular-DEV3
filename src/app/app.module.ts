@@ -20,8 +20,6 @@ import { NotfoundComponent } from './notfound/notfound.component';
     ReactiveFormsModule,
     HttpClientModule,
     DataTablesModule,
-    ajax,
-    css,
     RouterModule.forRoot([{ path: '', component: HomeComponent }]),
     AppRoutingModule,
   ],

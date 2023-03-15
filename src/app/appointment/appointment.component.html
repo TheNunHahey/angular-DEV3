@@ -4,18 +4,18 @@
 >
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Job Title</th>
+      <th>Time</th>
+      <th>Date</th>
+      <th>Clinic</th>
+      <th>Doctor</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let group of data">
-      <td>{{ group.id }}</td>
-      <td>{{ group.name }}</td>
-      <td>{{ group.email }}</td>
-      <td>{{ group.job_title }}</td>
+      <td>{{ group.AppointDateTimeFrom }}</td>
+      <td>{{ group.AppointDateTimeFromShow }}</td>
+      <td>{{ group.ClinicLocalName }}</td>
+      <td>{{ group.DoctorLocalName }}</td>
     </tr>
   </tbody>
 </table>

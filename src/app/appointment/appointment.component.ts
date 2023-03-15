@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
+declare var $: any;
 
 @Component({
   selector: 'app-appointment',
@@ -10,10 +11,27 @@ import { DataTablesModule } from 'angular-datatables';
 })
 export class AppointmentComponent implements OnInit {
   data: any;
-  constructor(private http: HttpClient, private router: Router) {
+  post: any;
+  constructor(private http: HttpClient, private router: Router) {}
+
+  ngOnInit() {
+    //this.http.get('https://therichpost.com/testjsonapi/users/').subscribe(
+    //  (data) => {
+    //console.log(data);
+    //    this.data = data;
+    //    setTimeout(() => {
+    //      $('#datatableexample').DataTable({
+    //        pagingType: 'full_numbers',
+    //        pageLength: 5,
+    //        processing: true,
+    //        lengthMenu: [5, 10, 25],
+    //      });
+    //    }, 1);
+    //  },
+    //  (error) => console.error(error)
+    //);
     let url =
       'https://dev-logic.net/dxapi/ProductRESTService.svc/EnquirePatientAppointment';
-
     this.http
       .post(url, {
         param: {
@@ -26,7 +44,8 @@ export class AppointmentComponent implements OnInit {
       })
       .subscribe(
         (data) => {
-          this.data = data;
+          console.log(data['ListResultDetail']);
+          this.data = data['ListResultDetail'];
           setTimeout(() => {
             $('#datatableexample').DataTable({
               pagingType: 'full_numbers',
@@ -39,8 +58,6 @@ export class AppointmentComponent implements OnInit {
         (error) => console.error(error)
       );
   }
-
-  ngOnInit() {}
 
   onTest2(event?: MouseEvent) {
     this.router.navigate(['home']);
