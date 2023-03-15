@@ -25,7 +25,7 @@
   class="d-flex align-items-center justify-content-center"
   style="padding-bottom:30px"
 >
-  <form [FormGroup]="userprofileForm" (ngSubmit="onSubmit()" )>
+  <form [formGroup]="userprofileForm" (submit)="onSubmit()">
     <div class="form-group" style="padding-bottom:30px">
       <label for="txt_idcard">ID Card / Passport</label>
       <input
