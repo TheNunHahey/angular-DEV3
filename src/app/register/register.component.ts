@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -15,8 +16,8 @@ export class RegisterComponent implements OnInit {
 
   hn: String;
   userprofileForm = new FormGroup({
-    pid: new FormControl(''),
-    tel: new FormControl(''),
+    pid: new FormControl('', Validators.required),
+    tel: new FormControl('', Validators.required),
   });
 
   onTest(event?: MouseEvent) {
