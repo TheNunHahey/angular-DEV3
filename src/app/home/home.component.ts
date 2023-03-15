@@ -74,7 +74,7 @@ export class HomeComponent {
 
   onTest2(event?: MouseEvent) {
     this.result2 = true;
-    this.router.navigate(['appointment']);
+    this.router.navigate(['notfound']);
   }
 }
 

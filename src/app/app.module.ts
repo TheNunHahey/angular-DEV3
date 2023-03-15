@@ -7,6 +7,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { RegisterComponent } from './register/register.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -17,7 +19,13 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule.forRoot([{ path: '', component: HomeComponent }]),
     AppRoutingModule,
   ],
-  declarations: [AppComponent, HomeComponent, AppointmentComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    AppointmentComponent,
+    RegisterComponent,
+    NotfoundComponent,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
