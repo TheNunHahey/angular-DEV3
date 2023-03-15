@@ -91,7 +91,7 @@ export class HomeComponent {
         this.result2 = 'true';
       });
     if (this.result2) {
-      this.router.navigate(['appointment']);
+      //this..navigate(['appointment']);
     }
   }
 }
