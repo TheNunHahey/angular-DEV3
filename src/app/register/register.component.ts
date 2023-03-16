@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
       })
       .toPromise()
       .then((data: any) => {
-        console.log(data);
+       // console.log(data);
         this.hn = data.HN;
         if (this.hn != '') {
           this.router.navigate(['appointment']);

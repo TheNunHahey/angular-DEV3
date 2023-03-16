@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { DataTablesModule } from 'angular-datatables';
+import {DataTablesModule} from 'angular-datatables';
+import {Subject} from 'rxjs';
+
 declare var $: any;
 
 @Component({
@@ -12,8 +14,10 @@ declare var $: any;
 export class AppointmentComponent implements OnInit {
   data: any;
   post: any;
-  constructor(private http: HttpClient, private router: Router) {}
-
+  //dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+  allUsers: any = [];
+  constructor(private http: HttpClient, private router: Router) { }
   ngOnInit() {
     //this.http.get('https://therichpost.com/testjsonapi/users/').subscribe(
     //  (data) => {
@@ -42,20 +46,12 @@ export class AppointmentComponent implements OnInit {
           ContextKey: 'ReU',
         },
       })
-      .subscribe(
-        (data) => {
-          console.log(data['ListResultDetail']);
-          this.data = data['ListResultDetail'];
-          setTimeout(() => {
-            $('#datatableexample').DataTable({
-              pagingType: 'full_numbers',
-              pageLength: 5,
-              processing: true,
-              lengthMenu: [5, 10, 25],
-            });
-          }, 1);
+      .subscribe((data) => {
+          this.data;
+          console.log(data);
+          //this.data = response.data;
+         this.data = data['ListResultDetail'];
         },
-        (error) => console.error(error)
       );
   }
 
