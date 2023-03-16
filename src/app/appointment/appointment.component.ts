@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import {DataTablesModule} from 'angular-datatables';
-import {Subject} from 'rxjs';
+import { DataTablesModule } from 'angular-datatables';
+import { Subject } from 'rxjs';
+import liff from '@line/liff';
+
+type UnPromise<T> = T extends Promise<infer X> ? X : T;
 
 declare var $: any;
 
@@ -14,48 +17,118 @@ declare var $: any;
 export class AppointmentComponent implements OnInit {
   data: any;
   post: any;
+  nameline: String;
+  urlimg: String;
+  hn: String;
   //dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   allUsers: any = [];
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+  os: ReturnType<typeof liff.getOS>;
+  profile: UnPromise<ReturnType<typeof liff.getProfile>>;
   ngOnInit() {
-    //this.http.get('https://therichpost.com/testjsonapi/users/').subscribe(
-    //  (data) => {
-    //console.log(data);
-    //    this.data = data;
-    //    setTimeout(() => {
-    //      $('#datatableexample').DataTable({
-    //        pagingType: 'full_numbers',
-    //        pageLength: 5,
-    //        processing: true,
-    //        lengthMenu: [5, 10, 25],
-    //      });
-    //    }, 1);
-    //  },
-    //  (error) => console.error(error)
-    //);
+    liff.init({ liffId: '1657421042-ekawW2jw' }).then(() => {
+      this.os = liff.getOS();
+      if (liff.isLoggedIn()) {
+        liff
+          .getProfile()
+          .then((profile) => {
+            this.profile = profile;
+            this.nameline = this.profile.displayName;
+            this.urlimg = this.profile.pictureUrl;
+            console.log(this.profile.userId);
+          })
+          .catch(console.error);
+      } else {
+        liff.login();
+      }
+    });
+
+    this.route.queryParams.subscribe((param) => {
+      this.hn = param.HN;
+    });
+
+    var today = new Date();
+    var startday = today.getDate();
+    var startmonth = today.getMonth() + 1; //January is 0!
+    var startyear = today.getFullYear();
+    var stringday;
+    var stringmonth;
+    var stringstartdate;
+
+    if (startday < 10) {
+      stringday = '0' + startday;
+    } else {
+      stringday = startday;
+    }
+
+    if (startmonth < 10) {
+      stringmonth = '0' + startmonth;
+    } else {
+      stringmonth = startmonth;
+    }
+
+    stringstartdate =
+      startyear + '-' + stringmonth + '-' + stringday + 'T00:00:00';
+
+    //add 90 days
+    var newdate = new Date();
+    newdate.setDate(newdate.getDate() + 90);
+
+    var endday = newdate.getDate();
+    var endmonth = newdate.getMonth() + 1; //January is 0!
+    var endyear = newdate.getFullYear();
+
+    var stringendday;
+    var stringendmonth;
+    var stringenddate;
+
+    if (endday < 10) {
+      stringendday = '0' + endday;
+    } else {
+      stringendday = endday;
+    }
+
+    if (endmonth < 10) {
+      stringendmonth = '0' + endmonth;
+    } else {
+      stringendmonth = endmonth;
+    }
+
+    stringenddate =
+      endyear + '-' + stringendmonth + '-' + stringendday + 'T00:00:00';
+
+    console.log(newdate); //2023-06-15T00:00:00
+
     let url =
       'https://dev-logic.net/dxapi/ProductRESTService.svc/EnquirePatientAppointment';
     this.http
       .post(url, {
         param: {
           EnglishView: false,
-          HN: '2200907',
-          AppointDateTimeFrom: '2023-01-13T00:00:00.000',
-          AppointDateTimeTo: '2023-03-01T00:00:00:000',
+          HN: this.hn,
+          AppointDateTimeFrom: stringstartdate,
+          AppointDateTimeTo: stringenddate,
           ContextKey: 'ReU',
         },
       })
       .subscribe((data) => {
-          this.data;
-          console.log(data);
-          //this.data = response.data;
-         this.data = data['ListResultDetail'];
-        },
-      );
+        this.data;
+        console.log(data);
+        //this.data = response.data;
+        this.data = data['ListResultDetail'];
+      });
   }
 
   onTest2(event?: MouseEvent) {
+    this.router.navigate(['home']);
+  }
+  onlogout(event?: MouseEvent) {
+    liff.logout();
     this.router.navigate(['home']);
   }
 }

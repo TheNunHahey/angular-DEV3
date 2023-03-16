@@ -11,15 +11,14 @@ type UnPromise<T> = T extends Promise<infer X> ? X : T;
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   result: Boolean;
   result2: Boolean;
+
+  //.init({ liffId: '1657421042-ekawW2jw' })
   os: ReturnType<typeof liff.getOS>;
   profile: UnPromise<ReturnType<typeof liff.getProfile>>;
-  onClick(event?: MouseEvent) {
-    if (event) {
-      event.stopPropagation();
-    }
+  ngOnInit(): void {
     liff
       .init({ liffId: '1657421042-ekawW2jw' })
       .then(() => {
@@ -29,6 +28,36 @@ export class HomeComponent {
             .getProfile()
             .then((profile) => {
               this.profile = profile;
+              console.log(this.profile.userId);
+              let url =
+                'https://dev-logic.net/dxapi/ProductRESTService.svc/MobileEnquireLineRegister';
+              this.http
+                .post(url, {
+                  param: {
+                    ContextKey: 'ReU',
+                    LineUserID: this.profile.userId,
+                  },
+                })
+                .toPromise()
+                .then((data: any) => {
+                  console.log(data);
+                  //console.log(data.LineRegistered);
+                  this.result = data.LineRegistered;
+                  if (data.HN) {
+                    this.router.navigate(['appointment'], {
+                      queryParams: {
+                        HN: data.HN,
+                      },
+                    });
+                  }
+                  if (this.result) {
+                    //alert('TEST');
+                  } else {
+                    //alert('TEST');
+                    //this.router.navigate(['appointment']);
+                    this.router.navigate(['register']);
+                  }
+                });
             })
             .catch(console.error);
         } else {
@@ -41,14 +70,6 @@ export class HomeComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   onTest(event?: MouseEvent) {
-    console.log(
-      JSON.stringify({
-        param: {
-          ContextKey: 'ReU',
-          LineUserID: 'Ue9d21deca4c514a40bfdd965f6996e22',
-        },
-      })
-    );
     let url =
       'https://dev-logic.net/dxapi/ProductRESTService.svc/MobileEnquireLineRegister';
     this.http
@@ -61,7 +82,7 @@ export class HomeComponent {
       .toPromise()
       .then((data: any) => {
         console.log(data);
-        console.log(data.LineRegistered);
+        //console.log(data.LineRegistered);
         this.result = data.LineRegistered;
       });
     if (this.result) {

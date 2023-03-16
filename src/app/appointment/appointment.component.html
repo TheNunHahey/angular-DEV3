@@ -3,7 +3,7 @@
   style="padding-bottom:30px"
 >
   <img
-    src="https://cdn.jsdelivr.net/gh/TheNunHahey/angular-DEV3@main/src/assets/img/user-avatar.png"
+    src="{{ urlimg }}"
     class="rounded-circle"
     alt="Hospital"
     style="width: auto; height: 150px;background-color: transparent;"
@@ -13,7 +13,7 @@
   class="d-flex align-items-center justify-content-center"
   style="padding-bottom:30px"
 >
-  <h1>Name</h1>
+  <h1>{{ nameline }}</h1>
 </div>
 
 <div class="container">
@@ -44,6 +44,15 @@
     type="button"
     class="btn btn-secondary text-white fw-bold"
     (click)="onTest2($event)"
+  >
+    <i class="fas fa-backward"></i> Back
+  </button>
+</div>
+<div class="text-center" style="margin-top: 20px;">
+  <button
+    type="button"
+    class="btn btn-secondary text-white fw-bold"
+    (click)="onlogout($event)"
   >
     <i class="fas fa-backward"></i> Back
   </button>
