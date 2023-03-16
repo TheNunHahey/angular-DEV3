@@ -23,16 +23,16 @@
   >
     <thead>
       <tr>
-        <th>Time</th>
         <th>Date</th>
+        <th>Time</th>
         <th>Clinic</th>
         <th>Doctor</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let group of data">
-        <td>{{ group.AppointDateTimeFrom }}</td>
         <td>{{ group.AppointDateTimeFromShow }}</td>
+        <td>{{ group.AppointDateTimeFrom }}</td>
         <td>{{ group.ClinicLocalName }}</td>
         <td>{{ group.DoctorLocalName }}</td>
       </tr>
